@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>🍗 PouletChaud</title>
+<title>🍗 PouletChaud — Commander</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -14,314 +14,230 @@
   }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
-
-  /* ===== PAGE CONNEXION ===== */
-  .login-page {
-    position: fixed; inset: 0; background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    z-index: 9998; padding: 20px;
-  }
-  .login-card {
-    background: var(--card); border: 1px solid var(--border);
-    border-radius: 20px; padding: 40px 32px; width: 100%; max-width: 380px;
-    text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-  }
-  .login-logo { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 4px; }
-  .login-sub { color: var(--muted); font-size: 0.85rem; margin-bottom: 32px; }
-  .login-group { display: flex; flex-direction: column; gap: 6px; text-align: left; margin-bottom: 16px; }
-  .login-group label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-  .login-group input {
-    background: var(--card2); border: 1px solid var(--border); border-radius: 10px;
-    padding: 13px 16px; color: var(--text); font-family: 'DM Sans', sans-serif;
-    font-size: 0.95rem; outline: none; transition: border-color 0.2s; width: 100%;
-  }
-  .login-group input:focus { border-color: var(--gold); }
-  .login-btn {
-    width: 100%; padding: 14px; border: none; border-radius: 12px;
-    background: linear-gradient(135deg, var(--gold), var(--orange));
-    color: #000; font-family: 'DM Sans', sans-serif; font-weight: 700;
-    font-size: 1rem; cursor: pointer; margin-top: 8px; transition: all 0.2s;
-  }
-  .login-btn:hover { opacity: 0.9; transform: translateY(-1px); }
-  .login-error { color: #ff6b6b; font-size: 0.82rem; margin-top: 12px; display: none; background: #2a0a0a; padding: 8px 12px; border-radius: 8px; }
-
-  /* ===== LOADER ===== */
-  .loader-overlay {
-    position: fixed; inset: 0; background: var(--bg);
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    z-index: 9999;
-  }
-  .loader-logo { font-family: 'Playfair Display', serif; font-size: 2.5rem; color: var(--gold); margin-bottom: 20px; }
-  .loader-spinner { width: 48px; height: 48px; border: 4px solid var(--border); border-top-color: var(--gold); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  .loader-text { color: var(--muted); margin-top: 16px; font-size: 0.9rem; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-
-  /* ===== HEADER ===== */
-  header {
-    background: linear-gradient(135deg, #1a0a00 0%, #2d1500 50%, #1a0a00 100%);
-    border-bottom: 2px solid var(--gold);
-    padding: 14px 20px; display: flex; align-items: center; justify-content: space-between;
-    position: sticky; top: 0; z-index: 100;
-  }
-  .logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: var(--gold); }
+  header { background: linear-gradient(135deg, #1a0a00, #2d1500, #1a0a00); border-bottom: 2px solid var(--gold); padding: 16px 20px; text-align: center; }
+  .logo { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; color: var(--gold); }
   .logo span { color: var(--orange); }
-  .header-right { display: flex; align-items: center; gap: 16px; }
-  .stats-bar { display: flex; gap: 16px; }
-  .stat { text-align: center; }
-  .stat-val { font-size: 1.2rem; font-weight: 700; color: var(--gold); }
-  .stat-label { font-size: 0.6rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
-  .logout-btn { background: none; border: 1px solid var(--border); border-radius: 8px; color: var(--muted); padding: 6px 12px; cursor: pointer; font-size: 0.75rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
-  .logout-btn:hover { color: var(--red); border-color: var(--red); }
-  .user-name { font-size: 0.8rem; color: var(--gold); font-weight: 600; }
-
-  /* ===== MAIN ===== */
-  .main { max-width: 1000px; margin: 0 auto; padding: 20px 16px; }
-  .tabs { display: flex; gap: 6px; margin-bottom: 24px; background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 5px; }
-  .tab { flex: 1; padding: 10px 16px; border: none; background: transparent; color: var(--muted); font-family: 'DM Sans', sans-serif; font-size: 0.85rem; font-weight: 500; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
-  .tab.active { background: var(--gold); color: #000; font-weight: 700; }
+  .tagline { color: var(--muted); font-size: 0.85rem; margin-top: 4px; }
+  .main { max-width: 600px; margin: 0 auto; padding: 24px 16px; }
+  .steps { display: flex; justify-content: center; margin-bottom: 28px; }
+  .step { display: flex; flex-direction: column; align-items: center; flex: 1; position: relative; }
+  .step::after { content: ''; position: absolute; top: 16px; left: 50%; width: 100%; height: 2px; background: var(--border); z-index: 0; }
+  .step:last-child::after { display: none; }
+  .step-num { width: 32px; height: 32px; border-radius: 50%; background: var(--border); color: var(--muted); display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.85rem; z-index: 1; transition: all 0.3s; }
+  .step.active .step-num { background: var(--gold); color: #000; }
+  .step.done .step-num { background: var(--green); color: #fff; }
+  .step-label { font-size: 0.65rem; color: var(--muted); margin-top: 5px; text-align: center; }
+  .step.active .step-label { color: var(--gold); font-weight: 600; }
   .panel { display: none; }
-  .panel.active { display: block; }
-
-  /* ===== FORM ===== */
-  .form-card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
-  .form-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 20px; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
-  .form-row.full { grid-template-columns: 1fr; }
-  .form-group { display: flex; flex-direction: column; gap: 5px; }
-  label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
-  input, select, textarea { background: var(--card2); border: 1px solid var(--border); border-radius: 8px; padding: 10px 14px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.9rem; outline: none; transition: border-color 0.2s; width: 100%; }
-  input:focus, select:focus, textarea:focus { border-color: var(--gold); }
+  .panel.active { display: block; animation: fadeIn 0.3s ease; }
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+  .card { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 24px; margin-bottom: 16px; }
+  .card-title { font-family: 'Playfair Display', serif; font-size: 1.3rem; color: var(--gold); margin-bottom: 20px; }
+  .produits-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .produit-card { background: var(--card2); border: 2px solid var(--border); border-radius: 14px; padding: 16px 12px; text-align: center; cursor: pointer; transition: all 0.2s; position: relative; }
+  .produit-card:hover { border-color: var(--orange); transform: translateY(-2px); }
+  .produit-card.selected { border-color: var(--gold); background: #2d1d00; }
+  .produit-ico { font-size: 2.2rem; margin-bottom: 6px; }
+  .produit-nom { font-size: 0.85rem; font-weight: 700; margin-bottom: 4px; }
+  .produit-desc { font-size: 0.7rem; color: var(--muted); margin-bottom: 6px; }
+  .produit-prix { font-size: 1rem; color: var(--gold); font-weight: 700; }
+  .produit-badge { position: absolute; top: -8px; right: -8px; background: var(--gold); color: #000; border-radius: 50%; width: 24px; height: 24px; display: none; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; }
+  .produit-card.selected .produit-badge { display: flex; }
+  .qty-control { display: none; align-items: center; justify-content: center; gap: 10px; margin-top: 10px; }
+  .produit-card.selected .qty-control { display: flex; }
+  .qty-btn { background: var(--border); border: none; border-radius: 6px; width: 28px; height: 28px; color: var(--text); font-size: 1.1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+  .qty-btn:hover { background: var(--gold); color: #000; }
+  .qty-num { font-weight: 700; color: var(--gold); min-width: 20px; text-align: center; }
+  .panier-empty { text-align: center; padding: 20px; color: var(--muted); font-size: 0.85rem; }
+  .panier-item { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 1px solid var(--border); }
+  .panier-item:last-child { border-bottom: none; }
+  .panier-nom { font-weight: 600; font-size: 0.9rem; }
+  .panier-qty { font-size: 0.8rem; color: var(--muted); }
+  .panier-prix { color: var(--gold); font-weight: 700; }
+  .total-ligne { display: flex; justify-content: space-between; align-items: center; padding: 14px 0 0; margin-top: 8px; border-top: 2px solid var(--gold); }
+  .total-label { font-weight: 700; }
+  .total-val { font-size: 1.4rem; font-weight: 700; color: var(--gold); }
+  .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 16px; }
+  .form-group label { font-size: 0.72rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; font-weight: 600; }
+  .form-group input, .form-group select, .form-group textarea { background: var(--card2); border: 1px solid var(--border); border-radius: 10px; padding: 12px 16px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s; width: 100%; }
+  .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--gold); }
   select option { background: #1a1100; }
-
-  /* ===== PRODUITS ===== */
-  .products-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 6px; }
-  .product-card { background: var(--card2); border: 2px solid var(--border); border-radius: 10px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
-  .product-card:hover { border-color: var(--orange); }
-  .product-card.selected { border-color: var(--gold); background: #2d1d00; }
-  .product-card .ico { font-size: 1.5rem; }
-  .product-card .pname { font-size: 0.7rem; font-weight: 600; margin: 3px 0; }
-  .product-card .pprice { font-size: 0.72rem; color: var(--gold); font-weight: 700; }
-  .qty-row { display: flex; align-items: center; justify-content: center; gap: 8px; margin-top: 6px; }
-  .qty-btn { background: var(--border); border: none; border-radius: 6px; width: 26px; height: 26px; color: var(--text); font-size: 1rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-  .qty-val { font-weight: 700; color: var(--gold); min-width: 20px; text-align: center; font-size: 0.9rem; }
-
-  .total-box { background: var(--card2); border: 1px solid var(--gold); border-radius: 10px; padding: 14px 18px; display: flex; justify-content: space-between; align-items: center; margin: 16px 0; }
-  .total-amount { font-size: 1.3rem; font-weight: 700; color: var(--gold); }
-  .form-actions { display: flex; gap: 10px; justify-content: flex-end; margin-top: 16px; }
-  .btn { padding: 11px 22px; border: none; border-radius: 10px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 0.9rem; cursor: pointer; transition: all 0.2s; }
+  .required { color: var(--orange); }
+  .paiement-options { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-top: 6px; }
+  .paiement-opt { background: var(--card2); border: 2px solid var(--border); border-radius: 12px; padding: 14px 10px; text-align: center; cursor: pointer; transition: all 0.2s; }
+  .paiement-opt:hover { border-color: var(--orange); }
+  .paiement-opt.selected { border-color: var(--gold); background: #2d1d00; }
+  .paiement-ico { font-size: 1.8rem; margin-bottom: 6px; }
+  .paiement-nom { font-size: 0.75rem; font-weight: 700; }
+  .paiement-info { font-size: 0.65rem; color: var(--muted); margin-top: 3px; }
+  .info-pay { border-radius: 10px; padding: 14px; margin-top: 10px; display: none; }
+  .info-pay-titre { font-size: 0.85rem; font-weight: 700; margin-bottom: 8px; }
+  .info-pay-num { font-size: 1.4rem; font-weight: 900; letter-spacing: 2px; margin: 6px 0; }
+  .info-pay-sub { font-size: 0.75rem; color: var(--muted); }
+  .copy-btn { background: var(--border); border: none; border-radius: 8px; color: var(--text); padding: 6px 14px; font-size: 0.78rem; cursor: pointer; margin-top: 8px; font-family: 'DM Sans', sans-serif; }
+  .copy-btn:hover { background: var(--gold); color: #000; }
+  .btn { padding: 14px; border: none; border-radius: 12px; font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; cursor: pointer; transition: all 0.2s; width: 100%; margin-top: 8px; }
   .btn-primary { background: linear-gradient(135deg, var(--gold), var(--orange)); color: #000; }
-  .btn-primary:hover { opacity: 0.9; transform: translateY(-1px); }
+  .btn-primary:hover { opacity: 0.9; }
   .btn-secondary { background: var(--card2); color: var(--text); border: 1px solid var(--border); }
-
-  /* ===== LISTE ===== */
-  .list-top { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; flex-wrap: wrap; gap: 10px; }
-  .list-title { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--gold); }
-  .search-bar { background: var(--card); border: 1px solid var(--border); border-radius: 8px; padding: 8px 14px; color: var(--text); font-family: 'DM Sans', sans-serif; outline: none; width: 200px; font-size: 0.85rem; }
-  .search-bar:focus { border-color: var(--gold); }
-  .filter-row { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
-  .filter-btn { padding: 6px 14px; border-radius: 30px; border: 1px solid var(--border); background: var(--card); color: var(--muted); font-size: 0.75rem; cursor: pointer; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
-  .filter-btn.active { background: var(--gold); color: #000; border-color: var(--gold); font-weight: 700; }
-
-  .orders-list { display: flex; flex-direction: column; gap: 10px; }
-  .order-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 16px 18px; transition: all 0.2s; animation: slideIn 0.3s ease; }
-  .order-card:hover { border-color: var(--gold); }
-  @keyframes slideIn { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
-  .order-top { display: flex; justify-content: space-between; align-items: flex-start; gap: 10px; }
-  .order-name { font-size: 1rem; font-weight: 700; }
-  .order-meta { font-size: 0.75rem; color: var(--muted); margin-top: 3px; }
-  .order-items { font-size: 0.75rem; color: var(--orange); margin-top: 5px; }
-  .order-right { text-align: right; min-width: 100px; }
-  .order-total { font-size: 1.1rem; font-weight: 700; color: var(--gold); }
-  .order-paye { font-size: 0.75rem; color: var(--green); }
-  .order-bottom { display: flex; justify-content: space-between; align-items: center; margin-top: 12px; flex-wrap: wrap; gap: 8px; }
-  .status-badge { display: inline-flex; align-items: center; gap: 5px; padding: 3px 10px; border-radius: 30px; font-size: 0.7rem; font-weight: 700; }
-  .s-commandé { background: #1a3a4a; color: var(--blue); border: 1px solid var(--blue); }
-  .s-reçu { background: #1a2a3a; color: #7eb8f7; border: 1px solid #7eb8f7; }
-  .s-payé { background: #0a2a1a; color: var(--green); border: 1px solid var(--green); }
-  .s-moitié { background: #2a2000; color: var(--yellow); border: 1px solid var(--yellow); }
-  .order-actions { display: flex; gap: 6px; align-items: center; flex-wrap: wrap; }
-  .status-select { background: var(--card2); border: 1px solid var(--border); border-radius: 6px; padding: 5px 8px; color: var(--text); font-family: 'DM Sans', sans-serif; font-size: 0.72rem; outline: none; cursor: pointer; }
-  .action-btn { background: none; border: 1px solid var(--border); border-radius: 6px; color: var(--muted); padding: 4px 9px; cursor: pointer; font-size: 0.72rem; font-family: 'DM Sans', sans-serif; transition: all 0.2s; }
-  .action-btn:hover { background: var(--card2); color: var(--text); }
-  .del-btn { border-color: #3a1a1a; color: #a05050; }
-  .del-btn:hover { background: var(--red); color: #fff; border-color: var(--red); }
-
-  .empty-state { text-align: center; padding: 50px 20px; color: var(--muted); }
-  .empty-ico { font-size: 3.5rem; margin-bottom: 12px; }
-
-  /* ===== MODAL ===== */
-  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); z-index: 200; align-items: center; justify-content: center; }
-  .modal-overlay.open { display: flex; }
-  .modal { background: var(--card); border: 1px solid var(--border); border-radius: 16px; padding: 28px; max-width: 320px; width: 90%; text-align: center; }
-  .modal-ico { font-size: 2.5rem; margin-bottom: 10px; }
-  .modal-title { font-weight: 700; font-size: 1rem; margin-bottom: 6px; }
-  .modal-text { color: var(--muted); font-size: 0.85rem; margin-bottom: 20px; }
-  .modal-actions { display: flex; gap: 10px; justify-content: center; }
-  .btn-danger { background: var(--red); color: #fff; padding: 10px 20px; border: none; border-radius: 8px; font-family: 'DM Sans', sans-serif; font-weight: 700; cursor: pointer; }
-
-  /* ===== TOAST ===== */
-  .toast { position: fixed; bottom: 24px; right: 16px; background: var(--gold); color: #000; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; z-index: 9999; display: none; animation: toastIn 0.3s ease; max-width: 280px; }
-  @keyframes toastIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
-
-  @media (max-width: 600px) {
-    .form-row { grid-template-columns: 1fr; }
-    .products-grid { grid-template-columns: repeat(2, 1fr); }
-    .stats-bar { gap: 10px; }
-    .logo { font-size: 1.1rem; }
-    .order-top { flex-direction: column; }
-    .order-right { text-align: left; }
-  }
+  .btn-wa { background: #25D366; color: #fff; }
+  .btn-row { display: flex; gap: 10px; }
+  .btn-row .btn { flex: 1; }
+  .success-page { text-align: center; padding: 30px 10px; }
+  .success-ico { font-size: 4rem; margin-bottom: 16px; animation: bounce 0.6s ease; }
+  @keyframes bounce { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+  .success-title { font-family: 'Playfair Display', serif; font-size: 1.8rem; color: var(--gold); margin-bottom: 10px; }
+  .success-text { color: var(--muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.6; }
+  .num-box { background: var(--card2); border: 1px solid var(--gold); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .num-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .num-val { font-size: 2rem; font-weight: 900; color: var(--gold); font-family: 'Playfair Display', serif; }
+  .statut-card { background: var(--card2); border-radius: 12px; padding: 16px; margin-bottom: 16px; }
+  .statut-row { display: flex; align-items: center; gap: 12px; padding: 8px 0; }
+  .statut-dot { width: 12px; height: 12px; border-radius: 50%; flex-shrink: 0; }
+  .statut-dot.done { background: var(--green); }
+  .statut-dot.active { background: var(--gold); animation: pulse 1s infinite; }
+  .statut-dot.pending { background: var(--border); }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+  .st-done { color: var(--green); font-size: 0.85rem; }
+  .st-active { color: var(--gold); font-weight: 700; font-size: 0.85rem; }
+  .st-pending { color: var(--muted); font-size: 0.85rem; }
+  .toast { position: fixed; bottom: 24px; right: 16px; background: var(--gold); color: #000; padding: 12px 20px; border-radius: 10px; font-weight: 700; font-size: 0.85rem; z-index: 999; display: none; max-width: 280px; }
 </style>
 </head>
 <body>
-
-<!-- PAGE CONNEXION -->
-<div class="login-page" id="login-page">
-  <div class="login-card">
-    <div class="login-logo">🍗 PouletChaud</div>
-    <div class="login-sub">Connectez-vous pour accéder à l'application</div>
-
-    <div class="login-group">
-      <label>Nom d'utilisateur</label>
-      <input type="text" id="login-user" type="email" placeholder="Votre email" onkeydown="if(event.key==='Enter') doLogin()">
-    </div>
-    <div class="login-group">
-      <label>Mot de passe</label>
-      <input type="password" id="login-pass" placeholder="••••••••" onkeydown="if(event.key==='Enter') doLogin()">
-    </div>
-
-    <button class="login-btn" onclick="doLogin()">🔐 Se connecter</button>
-    <div class="login-error" id="login-error">❌ Nom ou mot de passe incorrect !</div>
+<header>
+  <div class="logo">🍗 Poulet<span>Chaud</span></div>
+  <div class="tagline">Poulet rôti frais — Livraison rapide 🔥</div>
+</header>
+<div class="main">
+  <div class="steps">
+    <div class="step active" id="step1"><div class="step-num">1</div><div class="step-label">Produits</div></div>
+    <div class="step" id="step2"><div class="step-num">2</div><div class="step-label">Infos</div></div>
+    <div class="step" id="step3"><div class="step-num">3</div><div class="step-label">Paiement</div></div>
+    <div class="step" id="step4"><div class="step-num">✓</div><div class="step-label">Confirmé</div></div>
   </div>
-</div>
 
-<!-- LOADER -->
-<div class="loader-overlay" id="loader" style="display:none">
-  <div class="loader-logo">🍗 PouletChaud</div>
-  <div class="loader-spinner"></div>
-  <div class="loader-text">Connexion à la base de données...</div>
-</div>
-
-<!-- APP PRINCIPALE (cachée jusqu'à connexion) -->
-<div id="app" style="display:none">
-  <header>
-    <div class="logo">🍗 Poulet<span>Chaud</span></div>
-    <div class="header-right">
-      <div class="stats-bar">
-        <div class="stat"><div class="stat-val" id="s-total">0</div><div class="stat-label">Total</div></div>
-        <div class="stat"><div class="stat-val" id="s-attente">0</div><div class="stat-label">Attente</div></div>
-        <div class="stat"><div class="stat-val" id="s-revenus">0F</div><div class="stat-label">Revenus</div></div>
-      </div>
-      <div>
-        <div class="user-name" id="user-display"></div>
-        <button class="logout-btn" onclick="doLogout()">Déconnexion</button>
-      </div>
+  <!-- ÉTAPE 1 -->
+  <div class="panel active" id="panel-1">
+    <div class="card">
+      <div class="card-title">🍗 Choisissez vos produits</div>
+      <div class="produits-grid" id="produits-grid"></div>
     </div>
-  </header>
-
-  <div class="main">
-    <div class="tabs">
-      <button class="tab active" onclick="switchTab('form')">➕ Nouvelle commande</button>
-      <button class="tab" onclick="switchTab('list')">📋 Commandes</button>
+    <div class="card">
+      <div class="card-title">🛒 Votre panier</div>
+      <div id="panier-content"><div class="panier-empty">Aucun produit sélectionné</div></div>
     </div>
+    <button class="btn btn-primary" onclick="goStep2()" id="btn-step2" disabled style="opacity:0.5">Continuer → Mes informations</button>
+  </div>
 
-    <!-- FORMULAIRE -->
-    <div class="panel active" id="panel-form">
-      <div class="form-card">
-        <div class="form-title" id="form-title">Nouvelle Commande</div>
-        <input type="hidden" id="edit-id">
-        <div class="form-row">
-          <div class="form-group">
-            <label>Nom du client *</label>
-            <input type="text" id="f-nom" placeholder="ex: Fatou Diallo">
-          </div>
-          <div class="form-group">
-            <label>Téléphone</label>
-            <input type="text" id="f-tel" placeholder="ex: 77 123 45 67">
-          </div>
-        </div>
-        <div class="form-row full" style="margin-bottom:14px">
-          <div class="form-group">
-            <label>Adresse / Zone</label>
-            <input type="text" id="f-adresse" placeholder="ex: Plateau, Dakar">
-          </div>
-        </div>
-        <div class="form-group" style="margin-bottom:14px">
-          <label>Produits commandés *</label>
-          <div class="products-grid" id="products-grid"></div>
-        </div>
-        <div class="form-row">
-          <div class="form-group">
-            <label>Statut</label>
-            <select id="f-statut">
-              <option value="commandé">🛒 Commandé</option>
-              <option value="reçu">📦 Reçu</option>
-              <option value="payé">✅ Payé</option>
-              <option value="moitié">💛 Payé à moitié</option>
-            </select>
-          </div>
-          <div class="form-group">
-            <label>Montant payé (FCFA)</label>
-            <input type="number" id="f-paye" placeholder="0" min="0">
-          </div>
-        </div>
-        <div class="form-row full" style="margin-bottom:0">
-          <div class="form-group">
-            <label>Note</label>
-            <textarea id="f-note" rows="2" placeholder="Instructions spéciales..."></textarea>
-          </div>
-        </div>
-        <div class="total-box">
-          <span style="color:var(--muted);font-weight:600;">Total :</span>
-          <span class="total-amount" id="total-display">0 FCFA</span>
-        </div>
-        <div class="form-actions">
-          <button class="btn btn-secondary" onclick="resetForm()">Annuler</button>
-          <button class="btn btn-primary" onclick="saveCommande()">💾 Enregistrer</button>
-        </div>
+  <!-- ÉTAPE 2 -->
+  <div class="panel" id="panel-2">
+    <div class="card">
+      <div class="card-title">👤 Vos informations</div>
+      <div class="form-group"><label>Nom complet <span class="required">*</span></label><input type="text" id="c-nom" placeholder="ex: Fatou Diallo"></div>
+      <div class="form-group"><label>Téléphone <span class="required">*</span></label><input type="tel" id="c-tel" placeholder="ex: 77 123 45 67"></div>
+      <div class="form-group"><label>Adresse de livraison <span class="required">*</span></label><input type="text" id="c-adresse" placeholder="ex: Rue 10, Médina, Dakar"></div>
+      <div class="form-group">
+        <label>Heure de livraison</label>
+        <select id="c-heure">
+          <option value="">Dès que possible</option>
+          <option>12h00</option><option>13h00</option><option>14h00</option>
+          <option>15h00</option><option>16h00</option><option>17h00</option>
+          <option>18h00</option><option>19h00</option><option>20h00</option><option>21h00</option>
+        </select>
       </div>
+      <div class="form-group"><label>Note spéciale</label><textarea id="c-note" rows="2" placeholder="ex: Bien grillé, sans piment..."></textarea></div>
     </div>
-
-    <!-- LISTE -->
-    <div class="panel" id="panel-list">
-      <div class="list-top">
-        <div class="list-title">Toutes les commandes</div>
-        <input class="search-bar" type="text" placeholder="🔍 Rechercher..." id="search" oninput="renderList()">
-      </div>
-      <div class="filter-row">
-        <button class="filter-btn active" onclick="setFilter('tous',this)">Tous</button>
-        <button class="filter-btn" onclick="setFilter('commandé',this)">🛒 Commandé</button>
-        <button class="filter-btn" onclick="setFilter('reçu',this)">📦 Reçu</button>
-        <button class="filter-btn" onclick="setFilter('payé',this)">✅ Payé</button>
-        <button class="filter-btn" onclick="setFilter('moitié',this)">💛 Moitié</button>
-      </div>
-      <div class="orders-list" id="orders-list"></div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(1)">← Retour</button>
+      <button class="btn btn-primary" onclick="goStep3()">Continuer → Paiement</button>
     </div>
   </div>
-</div>
 
-<!-- MODAL SUPPRESSION -->
-<div class="modal-overlay" id="modal">
-  <div class="modal">
-    <div class="modal-ico">🗑️</div>
-    <div class="modal-title">Supprimer ?</div>
-    <div class="modal-text">Cette commande sera définitivement supprimée.</div>
-    <div class="modal-actions">
-      <button class="btn btn-secondary" onclick="closeModal()">Annuler</button>
-      <button class="btn-danger" onclick="confirmDelete()">Supprimer</button>
+  <!-- ÉTAPE 3 -->
+  <div class="panel" id="panel-3">
+    <div class="card">
+      <div class="card-title">💳 Mode de paiement</div>
+      <div class="paiement-options">
+        <div class="paiement-opt" id="pay-wave" onclick="selectPay('wave')">
+          <div class="paiement-ico">🌊</div><div class="paiement-nom">Wave</div><div class="paiement-info">Paiement mobile</div>
+        </div>
+        <div class="paiement-opt" id="pay-om" onclick="selectPay('om')">
+          <div class="paiement-ico">🟠</div><div class="paiement-nom">Orange Money</div><div class="paiement-info">Paiement mobile</div>
+        </div>
+        <div class="paiement-opt" id="pay-livraison" onclick="selectPay('livraison')">
+          <div class="paiement-ico">🤝</div><div class="paiement-nom">À la livraison</div><div class="paiement-info">Cash ou mobile</div>
+        </div>
+      </div>
+
+      <div class="info-pay" id="info-wave" style="background:#0a1a2a; border:1px solid #3498db;">
+        <div class="info-pay-titre" style="color:#3498db;">🌊 Paiement Wave</div>
+        <div class="info-pay-sub">Envoyez ce montant :</div>
+        <div class="info-pay-num" style="color:var(--gold)" id="wave-mnt">0 FCFA</div>
+        <div class="info-pay-sub">Au numéro :</div>
+        <div class="info-pay-num" id="wave-num">77 000 00 00</div>
+        <div class="info-pay-sub">Mettez votre nom en référence</div>
+        <button class="copy-btn" onclick="copyNum('wave-num')">📋 Copier</button>
+      </div>
+
+      <div class="info-pay" id="info-om" style="background:#1a0d00; border:1px solid #ff6600;">
+        <div class="info-pay-titre" style="color:#ff6600;">🟠 Orange Money</div>
+        <div class="info-pay-sub">Envoyez ce montant :</div>
+        <div class="info-pay-num" style="color:var(--gold)" id="om-mnt">0 FCFA</div>
+        <div class="info-pay-sub">Au numéro :</div>
+        <div class="info-pay-num" id="om-num">77 000 00 00</div>
+        <div class="info-pay-sub">Mettez votre nom en référence</div>
+        <button class="copy-btn" onclick="copyNum('om-num')">📋 Copier</button>
+      </div>
+
+      <div class="info-pay" id="info-livraison" style="background:#0a2a0a; border:1px solid var(--green);">
+        <div class="info-pay-titre" style="color:var(--green);">🤝 Paiement à la livraison</div>
+        <div class="info-pay-sub">Préparez la somme exacte :</div>
+        <div class="info-pay-num" style="color:var(--gold)" id="liv-mnt">0 FCFA</div>
+        <div class="info-pay-sub">Cash, Wave ou Orange Money acceptés</div>
+      </div>
+
+      <div style="background:var(--card2); border-radius:10px; padding:14px; margin-top:16px;">
+        <div style="font-size:0.75rem; color:var(--muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:10px;">Récapitulatif</div>
+        <div id="recap-items"></div>
+        <div class="total-ligne">
+          <span class="total-label">Total</span>
+          <span class="total-val" id="recap-total">0 FCFA</span>
+        </div>
+      </div>
+    </div>
+    <div class="btn-row">
+      <button class="btn btn-secondary" onclick="goStep(2)">← Retour</button>
+      <button class="btn btn-primary" id="btn-confirmer" onclick="passerCommande()">✅ Confirmer ma commande</button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 4 -->
+  <div class="panel" id="panel-4">
+    <div class="card success-page">
+      <div class="success-ico">🎉</div>
+      <div class="success-title">Commande confirmée !</div>
+      <div class="success-text">Merci ! Votre commande est bien reçue.<br>Nous la préparons dès maintenant. 🍗🔥</div>
+      <div class="num-box">
+        <div class="num-label">Numéro de commande</div>
+        <div class="num-val" id="num-commande">#000000</div>
+      </div>
+      <div class="statut-card">
+        <div class="statut-row"><div class="statut-dot done"></div><div class="st-done">✅ Commande reçue</div></div>
+        <div class="statut-row"><div class="statut-dot active"></div><div class="st-active">⏳ En cours de traitement...</div></div>
+        <div class="statut-row"><div class="statut-dot pending"></div><div class="st-pending">🚚 En cours de livraison</div></div>
+        <div class="statut-row"><div class="statut-dot pending"></div><div class="st-pending">🏠 Livré</div></div>
+      </div>
+      <button class="btn btn-wa" onclick="contacterWA()" style="margin-bottom:8px;">💬 Nous contacter sur WhatsApp</button>
+      <button class="btn btn-primary" onclick="nouvelleCommande()">🍗 Nouvelle commande</button>
     </div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
 
-<!-- FIREBASE -->
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getDatabase, ref, push, set, remove, onValue, update }
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-  import { getAuth, signInWithEmailAndPassword, signOut, onAuthStateChanged }
-    from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+  import { getDatabase, ref, push, get } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
   const firebaseConfig = {
     apiKey: "AIzaSyAi43Q2rqSkRyLmvBSMCrMdq2PBsLJCpXw",
@@ -335,355 +251,220 @@
 
   const app = initializeApp(firebaseConfig);
   const db = getDatabase(app);
-  const auth = getAuth(app);
-  const commandesRef = ref(db, 'commandes');
 
-  window._db = db;
-  window._ref = ref;
-  window._push = push;
-  window._set = set;
-  window._remove = remove;
-  window._update = update;
-  window._commandesRef = commandesRef;
-  window._signIn = (email, pass) => signInWithEmailAndPassword(auth, email, pass);
-  window._signOut = () => signOut(auth);
-
-  // Vérifier si déjà connecté
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      const nom = user.email.split('@')[0];
-      document.getElementById('login-page').style.display = 'none';
-      document.getElementById('loader').style.display = 'flex';
-      document.getElementById('user-display').textContent = '👤 ' + nom;
-      window._startListening && window._startListening();
-    }
-  });
-
-  window._startListening = function() {
-    onValue(commandesRef, (snapshot) => {
-      const data = snapshot.val();
-      window._commandes = [];
-      if (data) {
-        Object.entries(data).forEach(([key, val]) => {
-          window._commandes.push({ ...val, firebaseKey: key });
-        });
-        window._commandes.sort((a, b) => (b.date || 0) - (a.date || 0));
-      }
-      document.getElementById('loader').style.display = 'none';
-      document.getElementById('app').style.display = 'block';
-      renderList();
-      updateStats();
-    }, (error) => {
-      document.getElementById('loader').style.display = 'none';
-      showToast('❌ Erreur de connexion !', true);
-    });
+  window._pushCommande = async (data) => {
+    const r = ref(db, 'commandes');
+    const result = await push(r, { ...data, date: Date.now() });
+    return result.key;
   };
+
+  // Charger les paramètres depuis Firebase
+  window._loadParams = async () => {
+    try {
+      const snap = await get(ref(db, 'parametres'));
+      if (snap.exists()) {
+        const p = snap.val();
+        if (p.wave_num) document.getElementById('wave-num').textContent = p.wave_num || CONFIG.wave;
+        if (p.om_num) document.getElementById('om-num').textContent = p.om_num || CONFIG.orange_money;
+        if (p.whatsapp) window._waNum = p.whatsapp.replace(/\D/g, '');
+      }
+    } catch(e) {}
+  };
+  window._loadParams();
 </script>
 
 <script>
-// ====== CONNEXION FIREBASE AUTH ======
-function doLogin() {
-  const email = document.getElementById('login-user').value.trim();
-  const pass = document.getElementById('login-pass').value;
-  const errEl = document.getElementById('login-error');
-
-  if (!email || !pass) {
-    errEl.textContent = '⚠️ Entrez votre email et mot de passe !';
-    errEl.style.display = 'block';
-    return;
-  }
-  if (!window._signIn) {
-    errEl.textContent = '⏳ Chargement, réessayez dans 2 secondes...';
-    errEl.style.display = 'block';
-    return;
-  }
-
-  const btn = document.querySelector('.login-btn');
-  btn.textContent = '⏳ Connexion...';
-  btn.disabled = true;
-
-  window._signIn(email, pass)
-    .then((result) => {
-      errEl.style.display = 'none';
-      const nom = result.user.email.split('@')[0];
-      document.getElementById('login-page').style.display = 'none';
-      document.getElementById('loader').style.display = 'flex';
-      document.getElementById('user-display').textContent = '👤 ' + nom;
-      window._startListening && window._startListening();
-    })
-    .catch(() => {
-      errEl.style.display = 'block';
-      errEl.textContent = '❌ Email ou mot de passe incorrect !';
-      document.getElementById('login-pass').value = '';
-      document.getElementById('login-pass').focus();
-      btn.textContent = '🔐 Se connecter';
-      btn.disabled = false;
-    });
-}
-
-function doLogout() {
-  window._signOut && window._signOut();
-  location.reload();
-}
-
-// ====== PRODUITS ======
 const PRODUITS = [
-  { id: 'poulet-entier', nom: 'Poulet Entier', prix: 4500, ico: '🍗' },
-  { id: 'demi-poulet',   nom: 'Demi Poulet',   prix: 2500, ico: '🍖' },
-  { id: 'cuisse',        nom: 'Cuisse',         prix: 1500, ico: '🦵' },
-  { id: 'ailes',         nom: 'Ailes x4',       prix: 1200, ico: '🐔' },
-  { id: 'yassa',         nom: 'Poulet Yassa',   prix: 5500, ico: '🍲' },
-  { id: 'brochettes',    nom: 'Brochettes x5',  prix: 2000, ico: '🍢' },
+  { id: 'poulet-entier', nom: 'Poulet Entier',     desc: 'Poulet rôti entier',        prix: 4500, ico: '🍗' },
+  { id: 'demi-poulet',   nom: 'Demi Poulet',        desc: 'Moitié de poulet rôti',     prix: 2500, ico: '🍖' },
+  { id: 'cuisse',        nom: 'Cuisse',              desc: 'Cuisse grillée',            prix: 1500, ico: '🦵' },
+  { id: 'ailes',         nom: 'Ailes x4',            desc: '4 ailes croustillantes',    prix: 1200, ico: '🐔' },
+  { id: 'yassa',         nom: 'Poulet Yassa',        desc: 'Mariné à l\'oignon',        prix: 5500, ico: '🍲' },
+  { id: 'brochettes',    nom: 'Brochettes x5',       desc: '5 brochettes de poulet',    prix: 2000, ico: '🍢' },
+  { id: 'poulet-citron', nom: 'Poulet Citron',       desc: 'Mariné citron & herbes',    prix: 4800, ico: '🍋' },
+  { id: 'aile-piquant',  nom: 'Ailes Piquantes x4',  desc: 'Sauce pimentée 🔥',         prix: 1400, ico: '🌶️' },
 ];
 
+// ============================================================
+// ✏️ ZONE DE CONFIGURATION — MODIFIEZ ICI VOS NUMÉROS
+// ============================================================
+
+const CONFIG = {
+  whatsapp:     '221770000000',  // ← Mettez votre numéro WhatsApp ici (sans espaces, avec 221 devant)
+  wave:         '77 000 00 00',  // ← Mettez votre numéro Wave ici
+  orange_money: '77 000 00 00',  // ← Mettez votre numéro Orange Money ici
+  email:        'sokhnabarry3@gmail.com', // ← Votre email de notification
+};
+
+// ============================================================
+
 let selection = {};
-let currentFilter = 'tous';
-let deleteTarget = null;
-window._commandes = [];
+let paiementChoisi = null;
+window._waNum = CONFIG.whatsapp;
+window._waMsg = '';
 
 function buildProduits() {
-  const grid = document.getElementById('products-grid');
-  grid.innerHTML = '';
-  PRODUITS.forEach(p => {
-    const div = document.createElement('div');
-    div.className = 'product-card';
-    div.id = 'pc-' + p.id;
-    div.innerHTML = `
-      <div class="ico">${p.ico}</div>
-      <div class="pname">${p.nom}</div>
-      <div class="pprice">${p.prix.toLocaleString()} F</div>
-      <div class="qty-row" id="qty-${p.id}" style="display:none">
-        <button class="qty-btn" onclick="changeQty('${p.id}',-1,event)">−</button>
-        <span class="qty-val" id="qv-${p.id}">0</span>
-        <button class="qty-btn" onclick="changeQty('${p.id}',1,event)">+</button>
+  document.getElementById('produits-grid').innerHTML = PRODUITS.map(p => `
+    <div class="produit-card" id="pc-${p.id}" onclick="toggleProduit('${p.id}')">
+      <div class="produit-badge" id="badge-${p.id}">0</div>
+      <div class="produit-ico">${p.ico}</div>
+      <div class="produit-nom">${p.nom}</div>
+      <div class="produit-desc">${p.desc}</div>
+      <div class="produit-prix">${p.prix.toLocaleString()} FCFA</div>
+      <div class="qty-control" onclick="event.stopPropagation()">
+        <button class="qty-btn" onclick="changeQty('${p.id}',-1)">−</button>
+        <span class="qty-num" id="qn-${p.id}">1</span>
+        <button class="qty-btn" onclick="changeQty('${p.id}',1)">+</button>
       </div>
-    `;
-    div.onclick = () => toggleProduit(p.id);
-    grid.appendChild(div);
-  });
+    </div>
+  `).join('');
 }
 
 function toggleProduit(id) {
-  if (selection[id]) {
-    delete selection[id];
-    document.getElementById('pc-' + id).classList.remove('selected');
-    document.getElementById('qty-' + id).style.display = 'none';
-  } else {
-    selection[id] = 1;
-    document.getElementById('pc-' + id).classList.add('selected');
-    document.getElementById('qty-' + id).style.display = 'flex';
-    document.getElementById('qv-' + id).textContent = 1;
-  }
-  updateTotal();
+  if (selection[id]) { delete selection[id]; document.getElementById('pc-'+id).classList.remove('selected'); }
+  else { selection[id]=1; document.getElementById('pc-'+id).classList.add('selected'); document.getElementById('qn-'+id).textContent=1; }
+  updateBadges(); updatePanier();
 }
 
-function changeQty(id, delta, e) {
-  e.stopPropagation();
-  selection[id] = Math.max(1, (selection[id] || 1) + delta);
-  document.getElementById('qv-' + id).textContent = selection[id];
-  updateTotal();
+function changeQty(id, d) {
+  if (!selection[id]) return;
+  selection[id] = Math.max(1, selection[id]+d);
+  document.getElementById('qn-'+id).textContent = selection[id];
+  updateBadges(); updatePanier();
 }
 
-function updateTotal() {
-  document.getElementById('total-display').textContent = calcTotal().toLocaleString() + ' FCFA';
+function updateBadges() {
+  Object.entries(selection).forEach(([id,qty]) => { const b=document.getElementById('badge-'+id); if(b) b.textContent=qty; });
 }
 
 function calcTotal() {
-  return Object.entries(selection).reduce((sum, [id, qty]) => {
-    const p = PRODUITS.find(x => x.id === id);
-    return sum + (p ? p.prix * qty : 0);
-  }, 0);
+  return Object.entries(selection).reduce((s,[id,q]) => { const p=PRODUITS.find(x=>x.id===id); return s+(p?p.prix*q:0); }, 0);
 }
 
-async function saveCommande() {
-  const nom = document.getElementById('f-nom').value.trim();
-  if (!nom) { showToast('⚠️ Nom du client requis !', true); return; }
-  if (Object.keys(selection).length === 0) { showToast('⚠️ Choisissez un produit !', true); return; }
-
-  const montantPaye = parseFloat(document.getElementById('f-paye').value) || 0;
-  const editId = document.getElementById('edit-id').value;
-
-  const data = {
-    nom, tel: document.getElementById('f-tel').value.trim(),
-    adresse: document.getElementById('f-adresse').value.trim(),
-    note: document.getElementById('f-note').value.trim(),
-    statut: document.getElementById('f-statut').value,
-    produits: { ...selection }, total: calcTotal(),
-    montantPaye, date: Date.now(),
-    ajoutePar: sessionStorage.getItem('poulet_user') || 'inconnu'
-  };
-
-  try {
-    if (editId) {
-      await window._set(window._ref(window._db, 'commandes/' + editId), data);
-      showToast('✅ Commande modifiée !');
-    } else {
-      await window._push(window._commandesRef, data);
-      showToast('🎉 Commande enregistrée !');
-    }
-    resetForm();
-    switchTab('list');
-  } catch (e) {
-    showToast('❌ Erreur : ' + e.message, true);
-  }
+function updatePanier() {
+  const keys = Object.keys(selection);
+  const btn = document.getElementById('btn-step2');
+  btn.disabled = keys.length===0; btn.style.opacity = keys.length===0?'0.5':'1';
+  const c = document.getElementById('panier-content');
+  if (!keys.length) { c.innerHTML='<div class="panier-empty">Aucun produit sélectionné</div>'; return; }
+  c.innerHTML = keys.map(id => { const p=PRODUITS.find(x=>x.id===id);
+    return `<div class="panier-item"><div><div class="panier-nom">${p.ico} ${p.nom}</div><div class="panier-qty">x${selection[id]}</div></div><div class="panier-prix">${(p.prix*selection[id]).toLocaleString()} F</div></div>`;
+  }).join('') + `<div class="total-ligne"><span class="total-label">Total</span><span class="total-val">${calcTotal().toLocaleString()} FCFA</span></div>`;
 }
 
-function editCommande(key) {
-  const c = window._commandes.find(x => x.firebaseKey === key);
-  if (!c) return;
-  document.getElementById('edit-id').value = key;
-  document.getElementById('form-title').textContent = '✏️ Modifier la Commande';
-  document.getElementById('f-nom').value = c.nom || '';
-  document.getElementById('f-tel').value = c.tel || '';
-  document.getElementById('f-adresse').value = c.adresse || '';
-  document.getElementById('f-note').value = c.note || '';
-  document.getElementById('f-statut').value = c.statut || 'commandé';
-  document.getElementById('f-paye').value = c.montantPaye || '';
-  selection = {};
-  PRODUITS.forEach(p => {
-    document.getElementById('pc-' + p.id).classList.remove('selected');
-    document.getElementById('qty-' + p.id).style.display = 'none';
-    document.getElementById('qv-' + p.id).textContent = 0;
-  });
-  if (c.produits) {
-    Object.entries(c.produits).forEach(([id, qty]) => {
-      selection[id] = qty;
-      const card = document.getElementById('pc-' + id);
-      if (card) {
-        card.classList.add('selected');
-        document.getElementById('qty-' + id).style.display = 'flex';
-        document.getElementById('qv-' + id).textContent = qty;
-      }
-    });
-  }
-  updateTotal();
-  switchTab('form');
+function goStep(n) {
+  document.querySelectorAll('.panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+n).classList.add('active');
+  for(let i=1;i<=4;i++){const s=document.getElementById('step'+i);s.classList.remove('active','done');if(i<n)s.classList.add('done');if(i===n)s.classList.add('active');}
+  window.scrollTo(0,0);
 }
 
-function askDelete(key) { deleteTarget = key; document.getElementById('modal').classList.add('open'); }
-function closeModal() { deleteTarget = null; document.getElementById('modal').classList.remove('open'); }
-async function confirmDelete() {
-  if (!deleteTarget) return;
-  try {
-    await window._remove(window._ref(window._db, 'commandes/' + deleteTarget));
-    showToast('🗑️ Commande supprimée !');
-  } catch (e) { showToast('❌ Erreur suppression', true); }
-  closeModal();
+function goStep2() {
+  if (!Object.keys(selection).length) { showToast('⚠️ Choisissez un produit !',true); return; }
+  goStep(2);
 }
 
-async function updateStatut(key, val) {
-  try {
-    await window._update(window._ref(window._db, 'commandes/' + key), { statut: val });
-    showToast('📋 Statut mis à jour !');
-  } catch (e) { showToast('❌ Erreur', true); }
-}
-
-function renderList() {
-  const search = (document.getElementById('search')?.value || '').toLowerCase();
-  let list = (window._commandes || []).filter(c => {
-    const matchFilter = currentFilter === 'tous' || c.statut === currentFilter;
-    const matchSearch = (c.nom || '').toLowerCase().includes(search) || (c.tel || '').includes(search);
-    return matchFilter && matchSearch;
-  });
-
-  const container = document.getElementById('orders-list');
-  if (!container) return;
-  if (list.length === 0) {
-    container.innerHTML = `<div class="empty-state"><div class="empty-ico">🍗</div><p>Aucune commande</p></div>`;
-    return;
-  }
-
-  const statusClass = { 'commandé': 's-commandé', 'reçu': 's-reçu', 'payé': 's-payé', 'moitié': 's-moitié' };
-  const statusLabel = { 'commandé': '🛒 Commandé', 'reçu': '📦 Reçu', 'payé': '✅ Payé', 'moitié': '💛 Moitié payé' };
-
-  container.innerHTML = list.map(c => {
-    const prodList = c.produits ? Object.entries(c.produits).map(([id, qty]) => {
-      const p = PRODUITS.find(x => x.id === id);
-      return p ? `${p.ico} ${p.nom} x${qty}` : '';
-    }).filter(Boolean).join(' · ') : '';
-
-    const date = c.date ? new Date(c.date).toLocaleDateString('fr-FR', { day:'2-digit', month:'short', year:'numeric' }) : '';
-    const sc = statusClass[c.statut] || 's-commandé';
-    const sl = statusLabel[c.statut] || c.statut;
-    const paye = c.montantPaye ? `<div class="order-paye">Payé: ${Number(c.montantPaye).toLocaleString()} F</div>` : '';
-
-    return `<div class="order-card">
-      <div class="order-top">
-        <div>
-          <div class="order-name">${c.nom}</div>
-          <div class="order-meta">${c.tel ? '📞 '+c.tel : ''} ${c.adresse ? '· 📍 '+c.adresse : ''}</div>
-          <div class="order-items">${prodList}</div>
-          ${c.note ? `<div class="order-meta" style="margin-top:3px">📝 ${c.note}</div>` : ''}
-          ${c.ajoutePar ? `<div class="order-meta" style="margin-top:3px;color:var(--gold)">👤 ${c.ajoutePar}</div>` : ''}
-        </div>
-        <div class="order-right">
-          <div class="order-total">${(c.total||0).toLocaleString()} F</div>
-          ${paye}
-          <div class="order-meta" style="margin-top:4px">${date}</div>
-        </div>
-      </div>
-      <div class="order-bottom">
-        <span class="status-badge ${sc}">${sl}</span>
-        <div class="order-actions">
-          <select class="status-select" onchange="updateStatut('${c.firebaseKey}', this.value)">
-            <option value="commandé" ${c.statut==='commandé'?'selected':''}>🛒 Commandé</option>
-            <option value="reçu" ${c.statut==='reçu'?'selected':''}>📦 Reçu</option>
-            <option value="payé" ${c.statut==='payé'?'selected':''}>✅ Payé</option>
-            <option value="moitié" ${c.statut==='moitié'?'selected':''}>💛 Moitié</option>
-          </select>
-          <button class="action-btn" onclick="editCommande('${c.firebaseKey}')">✏️</button>
-          <button class="action-btn del-btn" onclick="askDelete('${c.firebaseKey}')">🗑️</button>
-        </div>
-      </div>
-    </div>`;
+function goStep3() {
+  const nom=document.getElementById('c-nom').value.trim();
+  const tel=document.getElementById('c-tel').value.trim();
+  const adresse=document.getElementById('c-adresse').value.trim();
+  if (!nom) { showToast('⚠️ Entrez votre nom !',true); return; }
+  if (!tel) { showToast('⚠️ Entrez votre téléphone !',true); return; }
+  if (!adresse) { showToast('⚠️ Entrez votre adresse !',true); return; }
+  const t = calcTotal();
+  const fmt = t.toLocaleString()+' FCFA';
+  ['wave-mnt','om-mnt','liv-mnt'].forEach(id => document.getElementById(id).textContent=fmt);
+  document.getElementById('recap-total').textContent = fmt;
+  document.getElementById('recap-items').innerHTML = Object.entries(selection).map(([id,qty])=>{
+    const p=PRODUITS.find(x=>x.id===id);
+    return `<div class="panier-item"><div><div class="panier-nom">${p.ico} ${p.nom}</div><div class="panier-qty">x${qty}</div></div><div class="panier-prix">${(p.prix*qty).toLocaleString()} F</div></div>`;
   }).join('');
+  goStep(3);
 }
 
-function updateStats() {
-  const all = window._commandes || [];
-  document.getElementById('s-total').textContent = all.length;
-  document.getElementById('s-attente').textContent = all.filter(c => c.statut === 'commandé' || c.statut === 'reçu').length;
-  const revenus = all.filter(c => c.statut === 'payé').reduce((s, c) => s + (c.total || 0), 0)
-    + all.filter(c => c.statut === 'moitié').reduce((s, c) => s + (c.montantPaye || 0), 0);
-  document.getElementById('s-revenus').textContent = revenus.toLocaleString() + 'F';
-}
-
-function setFilter(f, btn) {
-  currentFilter = f;
-  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-  btn.classList.add('active');
-  renderList();
-}
-
-function switchTab(tab) {
-  document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('panel-' + tab).classList.add('active');
-  document.querySelectorAll('.tab')[tab === 'form' ? 0 : 1].classList.add('active');
-  if (tab === 'list') renderList();
-}
-
-function resetForm() {
-  document.getElementById('edit-id').value = '';
-  document.getElementById('form-title').textContent = 'Nouvelle Commande';
-  ['f-nom','f-tel','f-adresse','f-note','f-paye'].forEach(id => document.getElementById(id).value = '');
-  document.getElementById('f-statut').value = 'commandé';
-  selection = {};
-  PRODUITS.forEach(p => {
-    document.getElementById('pc-' + p.id).classList.remove('selected');
-    document.getElementById('qty-' + p.id).style.display = 'none';
-    document.getElementById('qv-' + p.id).textContent = 0;
+function selectPay(type) {
+  paiementChoisi = type;
+  ['wave','om','livraison'].forEach(t => {
+    document.getElementById('pay-'+t).classList.toggle('selected', t===type);
+    document.getElementById('info-'+t).style.display = t===type?'block':'none';
   });
-  updateTotal();
+}
+
+function copyNum(id) {
+  const n = document.getElementById(id).textContent.replace(/\s/g,'');
+  navigator.clipboard.writeText(n).then(()=>showToast('📋 Numéro copié !'));
+}
+
+async function passerCommande() {
+  if (!paiementChoisi) { showToast('⚠️ Choisissez un mode de paiement !',true); return; }
+  const btn = document.getElementById('btn-confirmer');
+  btn.textContent='⏳ Envoi...'; btn.disabled=true;
+
+  const labels = {wave:'Wave', om:'Orange Money', livraison:'À la livraison'};
+  const nom=document.getElementById('c-nom').value.trim();
+  const tel=document.getElementById('c-tel').value.trim();
+  const adresse=document.getElementById('c-adresse').value.trim();
+  const heure=document.getElementById('c-heure').value||'Dès que possible';
+  const note=document.getElementById('c-note').value.trim();
+  const total=calcTotal();
+
+  const data = { nom, tel, adresse, heure, note, produits:{...selection}, total, paiement:labels[paiementChoisi], statut:'commandé', montantPaye:0, source:'client' };
+
+  try {
+    const key = await window._pushCommande(data);
+    const num = '#'+key.slice(-6).toUpperCase();
+    document.getElementById('num-commande').textContent = num;
+
+    // Préparer message WhatsApp
+    const prodList = Object.entries(selection).map(([id,qty])=>{
+      const p=PRODUITS.find(x=>x.id===id); return `${p.ico} ${p.nom} x${qty}`;
+    }).join(', ');
+
+    window._waMsg = `🍗 *NOUVELLE COMMANDE ${num}*\n\n👤 *Client:* ${nom}\n📞 *Tél:* ${tel}\n📍 *Adresse:* ${adresse}\n⏰ *Heure:* ${heure}\n\n*Produits:* ${prodList}\n\n💰 *Total:* ${total.toLocaleString()} FCFA\n💳 *Paiement:* ${labels[paiementChoisi]}${note?'\n📝 *Note:* '+note:''}`;
+
+    // Envoyer notification email via EmailJS (gratuit)
+    if (window.emailjs) {
+      emailjs.send('service_poulet', 'template_commande', {
+        to_email: 'sokhnabarry3@gmail.com',
+        commande_num: num,
+        client_nom: nom,
+        client_tel: tel,
+        client_adresse: adresse,
+        produits: prodList,
+        total: total.toLocaleString()+' FCFA',
+        paiement: labels[paiementChoisi],
+        heure: heure,
+        note: note || 'Aucune'
+      }).catch(()=>{});
+    }
+
+    goStep(4);
+  } catch(e) {
+    showToast('❌ Erreur : '+e.message, true);
+    btn.textContent='✅ Confirmer ma commande'; btn.disabled=false;
+  }
+}
+
+function contacterWA() {
+  const num = (window._waNum||'221770000000').replace(/\D/g,'');
+  window.open(`https://wa.me/${num}?text=${encodeURIComponent(window._waMsg||'Bonjour PouletChaud!')}`, '_blank');
+}
+
+function nouvelleCommande() {
+  selection={}; paiementChoisi=null;
+  buildProduits();
+  ['c-nom','c-tel','c-adresse','c-note'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('c-heure').value='';
+  ['wave','om','livraison'].forEach(t=>{ document.getElementById('pay-'+t).classList.remove('selected'); document.getElementById('info-'+t).style.display='none'; });
+  const btn=document.getElementById('btn-confirmer');
+  if(btn){btn.textContent='✅ Confirmer ma commande';btn.disabled=false;}
+  goStep(1); updatePanier();
 }
 
 function showToast(msg, error) {
-  const t = document.getElementById('toast');
-  t.textContent = msg;
-  t.style.background = error ? '#c0392b' : 'var(--gold)';
-  t.style.color = error ? '#fff' : '#000';
-  t.style.display = 'block';
-  setTimeout(() => t.style.display = 'none', 2500);
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.style.background=error?'#c0392b':'var(--gold)'; t.style.color=error?'#fff':'#000';
+  t.style.display='block'; setTimeout(()=>t.style.display='none',2500);
 }
 
 buildProduits();
